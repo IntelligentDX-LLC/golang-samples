@@ -1,4 +1,4 @@
-module github.com/IntelligentDX-LLC/golang-sampless
+module github.com/IntelligentDX-LLC/golang-samples
 
 go 1.11
 
