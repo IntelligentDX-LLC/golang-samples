@@ -1,4 +1,4 @@
-module github.com/GoogleCloudPlatform/golang-samples
+module github.com/IntelligentDX-LLC/golang-sampless
 
 go 1.11
 
