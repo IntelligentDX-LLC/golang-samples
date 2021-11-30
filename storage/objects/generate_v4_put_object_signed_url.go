@@ -26,7 +26,7 @@ import (
 )
 
 // generateV4PutObjectSignedURL generates object signed URL with PUT method.
-func generateV4PutObjectSignedURL(w io.Writer, bucket, object, serviceAccount string) (string, error) {
+func GenerateV4PutObjectSignedURL(w io.Writer, bucket, object, serviceAccount string) (string, error) {
 	// bucket := "bucket-name"
 	// object := "object-name"
 	// serviceAccount := "service_account.json"
