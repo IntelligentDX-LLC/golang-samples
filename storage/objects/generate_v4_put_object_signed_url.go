@@ -31,7 +31,6 @@ func GenerateV4PutObjectSignedURL(w io.Writer, bucket, object, serviceAccount st
 	// object := "object-name"
 	// serviceAccount := "service_account.json"
 	jsonKey, err := ioutil.ReadFile(serviceAccount)
-	fmt.Println(jsonKey) // REMOVE
 	if err != nil {
 		return "", fmt.Errorf("ioutil.ReadFile: %v", err)
 	}
@@ -39,6 +38,8 @@ func GenerateV4PutObjectSignedURL(w io.Writer, bucket, object, serviceAccount st
 	if err != nil {
 		return "", fmt.Errorf("google.JWTConfigFromJSON: %v", err)
 	}
+	fmt.Println(conf.Email)      // REMOVE
+	fmt.Println(conf.PrivateKey) // REMOVE
 	opts := &storage.SignedURLOptions{
 		Scheme: storage.SigningSchemeV4,
 		Method: "PUT",
