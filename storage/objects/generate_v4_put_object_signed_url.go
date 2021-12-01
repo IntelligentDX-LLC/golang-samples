@@ -31,6 +31,7 @@ func GenerateV4PutObjectSignedURL(w io.Writer, bucket, object, serviceAccount st
 	// object := "object-name"
 	// serviceAccount := "service_account.json"
 	jsonKey, err := ioutil.ReadFile(serviceAccount)
+	fmt.Println(jsonKey) // REMOVE
 	if err != nil {
 		return "", fmt.Errorf("ioutil.ReadFile: %v", err)
 	}
