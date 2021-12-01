@@ -38,8 +38,6 @@ func GenerateV4PutObjectSignedURL(w io.Writer, bucket, object, serviceAccount st
 	if err != nil {
 		return "", fmt.Errorf("google.JWTConfigFromJSON: %v", err)
 	}
-	fmt.Println(conf.Email)      // REMOVE
-	fmt.Println(conf.PrivateKey) // REMOVE
 	opts := &storage.SignedURLOptions{
 		Scheme: storage.SigningSchemeV4,
 		Method: "PUT",
