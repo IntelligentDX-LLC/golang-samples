@@ -39,7 +39,7 @@ var form = `<form action="{{ .URL }}" method="POST" enctype="multipart/form-data
 var tmpl = template.Must(template.New("policyV4").Parse(form))
 
 // generateSignedPostPolicyV4 generates a signed post policy.
-func GenerateSignedPostPolicyV4(w io.Writer, bucket, object, serviceAccountJSONPath string) (*storage.PostPolicyV4, error) {
+func MyGenerateSignedPostPolicyV4(w io.Writer, bucket, object, serviceAccountJSONPath string) (*storage.PostPolicyV4, error) {
 	// bucket := "bucket-name"
 	// object := "object-name"
 	// serviceAccountJSONPath := "service_account.json"
