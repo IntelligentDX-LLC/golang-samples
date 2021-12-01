@@ -42,7 +42,7 @@ func GenerateV4PutObjectSignedURL(w io.Writer, bucket, object, serviceAccount st
 		Scheme: storage.SigningSchemeV4,
 		Method: "PUT",
 		Headers: []string{
-			"Content-Type:application/octet-stream",
+			"Content-Type:application/json",
 		},
 		GoogleAccessID: conf.Email,
 		PrivateKey:     conf.PrivateKey,
