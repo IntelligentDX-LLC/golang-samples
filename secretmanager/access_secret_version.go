@@ -27,7 +27,7 @@ import (
 // accessSecretVersion accesses the payload for the given secret version if one
 // exists. The version can be a version number as a string (e.g. "5") or an
 // alias (e.g. "latest").
-func accessSecretVersion(w io.Writer, name string) error {
+func MyAccessSecretVersion(w io.Writer, name string) (string, error) {
 	// name := "projects/my-project/secrets/my-secret/versions/5"
 	// name := "projects/my-project/secrets/my-secret/versions/latest"
 
@@ -35,7 +35,7 @@ func accessSecretVersion(w io.Writer, name string) error {
 	ctx := context.Background()
 	client, err := secretmanager.NewClient(ctx)
 	if err != nil {
-		return fmt.Errorf("failed to create secretmanager client: %v", err)
+		return "", fmt.Errorf("failed to create secretmanager client: %v", err)
 	}
 	defer client.Close()
 
@@ -47,13 +47,13 @@ func accessSecretVersion(w io.Writer, name string) error {
 	// Call the API.
 	result, err := client.AccessSecretVersion(ctx, req)
 	if err != nil {
-		return fmt.Errorf("failed to access secret version: %v", err)
+		return "", fmt.Errorf("failed to access secret version: %v", err)
 	}
 
 	// WARNING: Do not print the secret in a production environment - this snippet
 	// is showing how to access the secret material.
-	fmt.Fprintf(w, "Plaintext: %s\n", string(result.Payload.Data))
-	return nil
+	//fmt.Fprintf(w, "Plaintext: %s\n", string(result.Payload.Data))
+	return string(result.Payload.Data), nil
 }
 
 // [END secretmanager_access_secret_version]
