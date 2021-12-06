@@ -18,7 +18,6 @@ package secretmanager
 import (
 	"context"
 	"fmt"
-	"io"
 
 	secretmanager "cloud.google.com/go/secretmanager/apiv1"
 	secretmanagerpb "google.golang.org/genproto/googleapis/cloud/secretmanager/v1"
@@ -27,7 +26,7 @@ import (
 // accessSecretVersion accesses the payload for the given secret version if one
 // exists. The version can be a version number as a string (e.g. "5") or an
 // alias (e.g. "latest").
-func MyAccessSecretVersion(w io.Writer, name string) (string, error) {
+func MyAccessSecretVersion(name string) (string, error) {
 	// name := "projects/my-project/secrets/my-secret/versions/5"
 	// name := "projects/my-project/secrets/my-secret/versions/latest"
 
