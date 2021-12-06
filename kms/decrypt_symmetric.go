@@ -26,7 +26,7 @@ import (
 )
 
 // decryptSymmetric will decrypt the input ciphertext bytes using the specified symmetric key.
-func DecryptSymmetric(name string, ciphertext []byte) (string, error) {
+func DecryptSymmetric(name string, ciphertext []byte) ([]byte, error) {
 	// name := "projects/my-project/locations/us-east1/keyRings/my-key-ring/cryptoKeys/my-key"
 	// ciphertext := []byte("...")  // result of a symmetric encryption call
 
@@ -34,7 +34,7 @@ func DecryptSymmetric(name string, ciphertext []byte) (string, error) {
 	ctx := context.Background()
 	client, err := kms.NewKeyManagementClient(ctx)
 	if err != nil {
-		return "", fmt.Errorf("failed to create kms client: %v", err)
+		return nil, fmt.Errorf("failed to create kms client: %v", err)
 	}
 	defer client.Close()
 
@@ -55,18 +55,18 @@ func DecryptSymmetric(name string, ciphertext []byte) (string, error) {
 	// Call the API.
 	result, err := client.Decrypt(ctx, req)
 	if err != nil {
-		return "", fmt.Errorf("failed to decrypt ciphertext: %v", err)
+		return nil, fmt.Errorf("failed to decrypt ciphertext: %v", err)
 	}
 
 	// Optional, but recommended: perform integrity verification on result.
 	// For more details on ensuring E2E in-transit integrity to and from Cloud KMS visit:
 	// https://cloud.google.com/kms/docs/data-integrity-guidelines
 	if int64(crc32c(result.Plaintext)) != result.PlaintextCrc32C.Value {
-		return "", fmt.Errorf("decrypt: response corrupted in-transit")
+		return nil, fmt.Errorf("decrypt: response corrupted in-transit")
 	}
 
 	//fmt.Fprintf(w, "Decrypted plaintext: %s", result.Plaintext)
-	return string(result.Plaintext), nil
+	return result.Plaintext, nil
 }
 
 // [END kms_decrypt_symmetric]
