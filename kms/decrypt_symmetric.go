@@ -19,7 +19,6 @@ import (
 	"context"
 	"fmt"
 	"hash/crc32"
-	"io"
 
 	kms "cloud.google.com/go/kms/apiv1"
 	kmspb "google.golang.org/genproto/googleapis/cloud/kms/v1"
@@ -27,7 +26,7 @@ import (
 )
 
 // decryptSymmetric will decrypt the input ciphertext bytes using the specified symmetric key.
-func DecryptSymmetric(w io.Writer, name string, ciphertext []byte) (string, error) {
+func DecryptSymmetric(name string, ciphertext []byte) (string, error) {
 	// name := "projects/my-project/locations/us-east1/keyRings/my-key-ring/cryptoKeys/my-key"
 	// ciphertext := []byte("...")  // result of a symmetric encryption call
 
