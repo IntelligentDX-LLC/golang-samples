@@ -62,11 +62,11 @@ func DecryptSymmetric(name string, ciphertext []byte) (string, error) {
 	// For more details on ensuring E2E in-transit integrity to and from Cloud KMS visit:
 	// https://cloud.google.com/kms/docs/data-integrity-guidelines
 	if int64(crc32c(result.Plaintext)) != result.PlaintextCrc32C.Value {
-		return "", fmt.Errorf("Decrypt: response corrupted in-transit")
+		return "", fmt.Errorf("decrypt: response corrupted in-transit")
 	}
 
 	//fmt.Fprintf(w, "Decrypted plaintext: %s", result.Plaintext)
-	return result.Plaintext, nil
+	return string(result.Plaintext), nil
 }
 
 // [END kms_decrypt_symmetric]
