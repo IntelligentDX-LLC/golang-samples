@@ -26,7 +26,7 @@ import (
 )
 
 // generateV4PutObjectSignedURL generates object signed URL with PUT method.
-func GenerateV4PutObjectSignedURL(w io.Writer, bucket, object, serviceAccount string) (string, error) {
+func GenerateV4PutObjectSignedURL(w io.Writer, bucket, object, serviceAccount string, expire) (string, error) {
 	// bucket := "bucket-name"
 	// object := "object-name"
 	// serviceAccount := "service_account.json"
@@ -46,7 +46,7 @@ func GenerateV4PutObjectSignedURL(w io.Writer, bucket, object, serviceAccount st
 		},
 		GoogleAccessID: conf.Email,
 		PrivateKey:     conf.PrivateKey,
-		Expires:        time.Now().Add(15 * time.Minute),
+		Expires:        time.Now().Add(time.Duration(expire) * time.Minute),
 	}
 	u, err := storage.SignedURL(bucket, object, opts)
 	if err != nil {
